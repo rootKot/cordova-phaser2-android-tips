@@ -100,3 +100,46 @@ And for fullscreen adding this preference:
 
 ## Conclusion
 Mainly my problem was with performance. And only thing that I needed was adding crossover-v3 plugin and set xwalk to --ignore-gpu-blacklist. After that everything magicly works fantastic! 
+
+## What's next? Integrating AdMob!
+https://github.com/ratson/cordova-plugin-admob-free
+
+```
+cordova plugin add cordova-plugin-admob-free --save --variable ADMOB_APP_ID="<YOUR_ANDROID_ADMOB_APP_ID_AS_FOUND_IN_ADMOB>"
+```
+
+```
+var admobid = {
+    banner: 'ca-app-pub-3921471305296855/2750437564',
+    interstitial: 'ca-app-pub-3921471305296855/2750437564',
+};
+document.addEventListener('deviceready', function() {
+    admob.banner.config({
+        id: admobid.banner,
+        isTesting: true,
+        autoShow: true,
+    });
+    admob.banner.prepare();
+
+    admob.interstitial.config({
+        id: admobid.interstitial,
+        isTesting: true,
+        autoShow: false,
+    });
+    admob.interstitial.prepare();
+}, false);
+
+function showInterstitialFunc() {
+    admob.interstitial.show();
+}
+
+document.addEventListener('admob.banner.events.LOAD_FAIL', function(event) {
+});
+document.addEventListener('admob.interstitial.events.LOAD_FAIL', function(event) {
+});
+document.addEventListener('admob.interstitial.events.LOAD', function(event) {
+});
+document.addEventListener('admob.interstitial.events.CLOSE', function(event) {
+    admob.interstitial.prepare();
+});
+```
