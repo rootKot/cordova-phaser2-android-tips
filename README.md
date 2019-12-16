@@ -143,3 +143,7 @@ document.addEventListener('admob.interstitial.events.CLOSE', function(event) {
     admob.interstitial.prepare();
 });
 ```
+## Generating Signature
+```
+"%JAVA_HOME%\bin\keytool" -genkey -v -keystore Santa2020.keystore -keyalg RSA -keysize 2048 -alias santa2020 -validity 20000
+```
